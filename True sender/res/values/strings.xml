@@ -3,5 +3,10 @@
 
     <string name="hello">Hello World, TruesenderActivity!</string>
     <string name="app_name">True sender</string>
+    <string-array name="operators">
+        <item >True senses</item>
+    </string-array>
+    <string name="destination">Number to send message to</string>
+    <string name="message">Message to send</string>
 
 </resources>
