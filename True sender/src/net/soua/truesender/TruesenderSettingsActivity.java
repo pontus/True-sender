@@ -3,14 +3,13 @@ package net.soua.truesender;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.telephony.TelephonyManager;
+import android.content.Context;
 
 public class TruesenderSettingsActivity extends Activity {
 
@@ -18,6 +17,8 @@ public class TruesenderSettingsActivity extends Activity {
 	
     protected ArrayAdapter<CharSequence> operatorAdapter;
 
+    private String operator;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +29,25 @@ public class TruesenderSettingsActivity extends Activity {
         
         
         settings = getSharedPreferences( getString(R.string.app_name), MODE_PRIVATE);
-        ((Spinner) findViewById(R.id.spinner)).setAdapter(this.operatorAdapter);
         
+        operator = settings.getString("operator", "");
+        
+        if (!operator.equals(""))
+        {
+        	//this.operatorAdapter.insert( operator.toCharArray(), 0);
+        }
+        
+        Spinner sp = (Spinner) findViewById(R.id.spinner);
+        
+        sp.setAdapter(this.operatorAdapter);
+        sp.setOnItemSelectedListener(new myOnItemSelectedListener());
+        
+        
+        String phoneNumber = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number(); 
          
-        ((EditText) findViewById(R.id.username)).setText(settings.getString("username", "username"));
- 		((EditText) findViewById(R.id.password)).setText(settings.getString("password", "password"));
-        ((EditText) findViewById(R.id.sourcenumber)).setText(settings.getString("sourcenumber", "+46"));
+        ((EditText) findViewById(R.id.username)).setText(settings.getString("username+"+operator, "username"));
+ 		((EditText) findViewById(R.id.password)).setText(settings.getString("password+"+operator, "password"));
+        ((EditText) findViewById(R.id.sourcenumber)).setText(settings.getString("sourcenumber+"+operator, phoneNumber));
     }
 
     
@@ -44,10 +58,10 @@ public class TruesenderSettingsActivity extends Activity {
     	
     	SharedPreferences.Editor e = settings.edit();
     	
-       	      	    	
-    	e.putString("username", ((EditText) findViewById(R.id.username)).getText().toString());
-    	e.putString("password", ((EditText) findViewById(R.id.password)).getText().toString());
-    	e.putString("source", ((EditText) findViewById(R.id.sourcenumber)).getText().toString());
+       	e.putString("operator", operator);     	    	
+    	e.putString("username+"+operator, ((EditText) findViewById(R.id.username)).getText().toString());
+    	e.putString("password+"+operator, ((EditText) findViewById(R.id.password)).getText().toString());
+    	e.putString("sourcenumber+"+operator, ((EditText) findViewById(R.id.sourcenumber)).getText().toString());
     	
     	e.commit();
     	
@@ -61,5 +75,17 @@ public class TruesenderSettingsActivity extends Activity {
     	finish();
     }
     
+    
+    public class myOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent,
+            View view, int pos, long id) {
+          operator =  parent.getItemAtPosition(pos).toString();
+        }
+
+        public void onNothingSelected(AdapterView parent) {
+          // Do nothing.
+        }
+    }
     
 }

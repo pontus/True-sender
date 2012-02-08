@@ -12,5 +12,8 @@
     <string name="accountname">Your account name at the operator:</string>
     <string name="password">Your password at the operator:</string>
     <string name="source">Message source (not supported by all operators):</string>
+    <string name="welcome">Welcome to True Sender!</string>
+    <string name="long_welcome">Welcome to True sender, a simple application to send text messages through IP based operator. Please note that the author is in no way affilliated with any of the operators. Next, you\'ll be taken to the setup screen.</string>
+    <string name="send_failed">Unfortunately, there was an error while sending the message and it was not delivered.</string>
 
 </resources>
