@@ -7,34 +7,33 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:text="@string/hello" 
+        android:id="@+id/header"/>
 
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/destination" />
+    
     <EditText
-        android:id="@+id/editText3"
+        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone" />
-    
+        android:inputType="phone" 
+        android:id="@+id/destination" />
+        
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/message" />
-
+        android:text="@string/message"
+  />
 
     <EditText
-        android:id="@+id/editText2"
+        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/message"
         android:inputType="textMultiLine" />
 
     <Button

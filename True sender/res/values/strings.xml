@@ -8,5 +8,9 @@
     </string-array>
     <string name="destination">Number to send message to</string>
     <string name="message">Message to send</string>
+    <string name="operator">Pick your operator in the list below</string>
+    <string name="accountname">Your account name at the operator:</string>
+    <string name="password">Your password at the operator:</string>
+    <string name="source">Message source (not supported by all operators):</string>
 
 </resources>
