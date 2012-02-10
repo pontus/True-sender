@@ -19,11 +19,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="smsto" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".TruesenderSettingsActivity"
             android:label="@string/app_name" >
+			<intent-filter>
+			    <category android:name="android.intent.category.PREFERENCES" />
+			</intent-filter>
         </activity>
         
         
