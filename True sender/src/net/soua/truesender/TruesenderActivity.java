@@ -1,5 +1,6 @@
 package net.soua.truesender;
 
+import android.util.Log;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.os.AsyncTask;
 public class TruesenderActivity extends Activity {
 	/** Called when the activity is first created. */
 
+	private static final String TAG = "True Sender";
 	protected ProgressDialog dialog;
 	protected String send_error;
 
@@ -32,25 +34,45 @@ public class TruesenderActivity extends Activity {
 		@Override
 		protected Integer doInBackground(String... msg) {
 
+			Log.i(TAG, "Sending message");
+
 			SharedPreferences settings = getSharedPreferences(
 					getString(R.string.app_name), MODE_PRIVATE);
 
 			String operatorName = settings.getString("operator", "");
+
+			String password = settings.getString("password+"+operatorName, "");
+			String username = settings.getString("username+"+operatorName, "");
+			String source = settings.getString("sourcenumber+"+operatorName, "");
+			
 			String classname = "net.soua.truesender."
 					+ operatorName.replaceAll("\\s", "") + "Operator";
+
+			Log.i(TAG, "Using operator " + operatorName);
 
 			try {
 
 				OperatorInterface operator = (OperatorInterface) Class.forName(
 						classname).newInstance();
+				
+				operator.passwordAuth(username, password);
+				operator.send(msg[0], source, msg[1]);
+				
 			} catch (ClassNotFoundException e) {
-				send_error = "Weird, class not found. Class was "+classname+". Corrupt installation/preferences?";
+				Log.e(TAG, "ClassNotFoundException for operator "
+						+ operatorName + " in doInBackground (sendtask)");
+				send_error = "Weird, class not found. Class was " + classname
+						+ ". Corrupt installation/preferences?";
 				return 1;
 
 			} catch (IllegalAccessException e) {
+				Log.e(TAG, "IllegalaccessException for operator "
+						+ operatorName + " in doInBackground (sendtask)");
 				send_error = "Weird, illegal access. Corrupt installation/preferences?";
 				return 1;
 			} catch (InstantiationException e) {
+				Log.e(TAG, "InstantiationException for operator "
+						+ operatorName + " in doInBackground (sendtask)");
 				send_error = "Weird, instantiation error. Corrupt installation/preferences?";
 				return 1;
 			}
@@ -91,14 +113,13 @@ public class TruesenderActivity extends Activity {
 			return;
 		}
 
-		SharedPreferences settings = getSharedPreferences(
-				getString(R.string.app_name), MODE_PRIVATE);
-
 		EditText message = (EditText) findViewById(R.id.message);
+		EditText destination = (EditText) findViewById(R.id.destination);
 
 		dialog = ProgressDialog.show(this, "", "Sending. Please wait...", true);
 
-		new SendTask().execute(message.getText().toString());
+		new SendTask().execute(message.getText().toString(), 
+				destination.getText().toString());
 
 	}
 
@@ -108,6 +129,7 @@ public class TruesenderActivity extends Activity {
 	}
 
 	private boolean settingsOk() {
+		Log.i(TAG, "Settings Ok?");
 		SharedPreferences settings = getSharedPreferences(
 				getString(R.string.app_name), MODE_PRIVATE);
 
@@ -117,8 +139,11 @@ public class TruesenderActivity extends Activity {
 
 	private void checkFirstRun() {
 
+		Log.i(TAG, "Checking for first run.");
 		if (settingsOk())
 			return;
+
+		Log.i(TAG, "First run, saying hi and sending to settings.");
 
 		new AlertDialog.Builder(this)
 				.setMessage(getString(R.string.long_welcome))
