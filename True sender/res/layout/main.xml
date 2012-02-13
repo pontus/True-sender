@@ -5,49 +5,87 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" 
-        android:id="@+id/header"/>
+        android:text="@string/hello" />
 
-    
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/destination" />
-    
-    <EditText
-        
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone" 
-        android:id="@+id/destination" />
-        
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/message"
-  />
 
     <EditText
-        
+        android:id="@+id/destination"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="phone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/characters_left" />
+
+            <TextView
+                android:id="@+id/charcount"
+                android:ems="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
         android:id="@+id/message"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="onSend"
-        android:text="@string/send_button_text" />
+        android:layout_gravity="top"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettings"
-        android:text="@string/settings_button_text" />
-    
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSend"
+            android:text="@string/send_button_text" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" >
+
+            <Button
+                android:id="@+id/settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:onClick="onSettings"
+                android:text="@string/settings_button_text" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
