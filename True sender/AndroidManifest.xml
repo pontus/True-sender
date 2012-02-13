@@ -23,9 +23,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
 
-                <data android:scheme="smsto" />
+                <data android:scheme="sms" />
 
-                <category android:name="android.intent.category.APP_MESSAGING" />
+<!--                 <category android:name="android.intent.category.APP_MESSAGING" />  -->
             </intent-filter>
         </activity>
         <activity
