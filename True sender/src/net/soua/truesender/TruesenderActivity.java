@@ -1,5 +1,6 @@
 package net.soua.truesender;
 
+import android.text.TextWatcher;
 import android.util.Log;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
 import android.content.SharedPreferences;
 import android.content.DialogInterface;
 
 import android.os.AsyncTask;
+import android.text.Editable;
 
 public class TruesenderActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -27,9 +30,37 @@ public class TruesenderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		EditText message = (EditText) findViewById(R.id.message);
+		message.addTextChangedListener(new CharCounter());
+		
+
 		checkFirstRun();
 	}
 
+	
+	
+	class CharCounter implements TextWatcher {
+		public void afterTextChanged(Editable s) {
+			EditText message = (EditText) findViewById(R.id.message);
+			int count = message.getText().length();
+			TextView chars = (TextView) findViewById(R.id.charcount);
+			chars.setText(160-count+"");
+		}
+
+		public void beforeTextChanged(CharSequence s, int a, int b, int c) {
+		
+		}
+		public void onTextChanged(CharSequence s,int a,int b,int c) {
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	class SendTask extends AsyncTask<String, Void, Integer> {
 		@Override
 		protected Integer doInBackground(String... msg) {
