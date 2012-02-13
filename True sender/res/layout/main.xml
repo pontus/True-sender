@@ -45,10 +45,11 @@
 
             <TextView
                 android:id="@+id/charcount"
-                android:ems="3"
+                android:ems="2"
+                android:gravity="right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="@string/sms_maxlen" />
         </LinearLayout>
     </LinearLayout>
 
