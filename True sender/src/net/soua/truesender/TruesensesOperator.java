@@ -67,6 +67,7 @@ public class TruesensesOperator implements OperatorInterface {
 			Log.e(TAG, "ClientProtocolException when talking to True senses");
 			return false;
 		} catch (IOException e) {
+			// send_error = "There was a problem when communicating with True Senses, please ensure you have internet connectivity.";
 			Log.e(TAG,"IOException when talking to True senses");
 			return false;
 		}
