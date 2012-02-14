@@ -4,6 +4,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.app.AlertDialog;
@@ -33,6 +34,13 @@ public class TruesenderActivity extends Activity {
 		EditText message = (EditText) findViewById(R.id.message);
 		message.addTextChangedListener(new CharCounter());
 		
+		Uri data = getIntent().getData();
+		if (data != null) {
+			String number = data.getEncodedSchemeSpecificPart();
+			EditText destination = (EditText) findViewById(R.id.destination);
+			
+			destination.setText(number.replaceAll("-",""));
+		}
 
 		checkFirstRun();
 	}
@@ -144,13 +152,42 @@ public class TruesenderActivity extends Activity {
 			return;
 		}
 
-		EditText message = (EditText) findViewById(R.id.message);
+		
+		// Todo: Check with operator interface if number is acceptable?
+		
 		EditText destination = (EditText) findViewById(R.id.destination);
+		String destinationNumber = destination.getText().toString();
+		if (!destinationNumber.startsWith("00") && 
+				!destinationNumber.startsWith("+"))
+		{
+			new AlertDialog.Builder(TruesenderActivity.this)
+			.setMessage(
+					getString(R.string.number_start))
+			.setTitle(getString(R.string.app_name))
+			.setCancelable(true)
+			.setNeutralButton("Ok",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int id) {
+							dialog.cancel();
+						}
+					})
+
+			.show();
+
+			
+			return;
+		}
+		
+		
+		EditText message = (EditText) findViewById(R.id.message);
+		
 
 		dialog = ProgressDialog.show(this, "", "Sending. Please wait...", true);
 
 		new SendTask().execute(message.getText().toString(), 
-				destination.getText().toString());
+				destinationNumber);
 
 	}
 

@@ -22,10 +22,13 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <data android:scheme="sms" />
+                <data android:scheme="smsto" />
 
-<!--                 <category android:name="android.intent.category.APP_MESSAGING" />  -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
             </intent-filter>
         </activity>
         <activity
@@ -36,6 +39,7 @@
             </intent-filter>
         </activity>
 
+        <!-- 
         <receiver
             android:name="TrueSenderReceiver"
             android:enabled="true"
@@ -43,10 +47,16 @@
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
                 <action android:name="android.intent.action.VIEW" />
-                <!--   --><data android:scheme="smsto" /> -->
-                <!--   --><category android:name="android.intent.category.APP_MESSAGING" /> -->
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
             </intent-filter>
         </receiver>
+        
+        -->
     </application>
 
 </manifest>

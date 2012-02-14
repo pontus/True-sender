@@ -21,5 +21,6 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="characters_left">Characters left:</string>
     <string name="sms_maxlen">160</string>
+    <string name="number_start">Destination number should start with international prefix 00 or +.</string>
 
 </resources>
