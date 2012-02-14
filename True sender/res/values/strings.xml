@@ -22,5 +22,7 @@
     <string name="characters_left">Characters left:</string>
     <string name="sms_maxlen">160</string>
     <string name="number_start">Destination number should start with international prefix 00 or +.</string>
+    <string name="message_sent_colon">Message sent:</string>
+    <string name="message_sent_exclamation">Message sent!</string>
 
 </resources>

@@ -32,19 +32,17 @@ public class TruesensesOperator implements OperatorInterface {
 	}
 
 	@Override
-	public boolean send(String message, String source, String destination) {
+	public boolean send(String message, String source, String destination)
+			throws Exception {
 
 		String url = "https://secure.simmcomm.ch/cgi-bin/smsgateway.cgi";
 
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
 		HttpResponse response;
-		
 
-		
 		try {
-			
-			
+
 			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 			pairs.add(new BasicNameValuePair("CMD", "sendmessage"));
 			pairs.add(new BasicNameValuePair("ACCOUNT", username));
@@ -56,20 +54,25 @@ public class TruesensesOperator implements OperatorInterface {
 			post.setEntity(new UrlEncodedFormEntity(pairs));
 
 			response = client.execute(post);
-			String responseText = new Scanner(response.getEntity().getContent()).next();
+			String responseText = new Scanner(response.getEntity().getContent())
+					.next();
 
-			Log.i(TAG, "Response from True senses: " +responseText);
-			if (false) {}
-			
-			
+			Log.i(TAG, "Response from True senses: " + responseText);
+
+			if (!responseText.startsWith("01")) {
+
+				throw new Exception("Error from True Senses" + responseText);
+			}
+
 		} catch (ClientProtocolException e) {
 
 			Log.e(TAG, "ClientProtocolException when talking to True senses");
-			return false;
-		} catch (IOException e) {
-			// send_error = "There was a problem when communicating with True Senses, please ensure you have internet connectivity.";
-			Log.e(TAG,"IOException when talking to True senses");
-			return false;
+			throw new Exception(
+					"ClientProtocolException when talking to True senses");
+
+		} catch (IOException e) {	
+			Log.e(TAG, "IOException when talking to True senses");
+			throw new Exception("There was a problem when communicating with True Senses, please ensure you have internet connectivity.");
 		}
 
 		// TODO Auto-generated method stub
