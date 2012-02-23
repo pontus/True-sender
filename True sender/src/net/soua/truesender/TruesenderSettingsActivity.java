@@ -83,7 +83,7 @@ public class TruesenderSettingsActivity extends Activity {
           operator =  parent.getItemAtPosition(pos).toString();
         }
 
-        public void onNothingSelected(AdapterView parent) {
+        public void onNothingSelected(AdapterView<?> parent) {
           // Do nothing.
         }
     }

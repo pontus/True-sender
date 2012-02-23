@@ -4,50 +4,91 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" 
-        android:id="@+id/header"/>
 
-    
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/destination" />
-    
-    <EditText
-        
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone" 
-        android:id="@+id/destination" />
-        
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/message"
-  />
 
     <EditText
-        
+        android:id="@+id/destination"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="phone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/message_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message" />
+
+        <LinearLayout
+            android:id="@+id/characters_left"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" 
+            android:longClickable="true"
+            android:clickable="false"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/characters_left" />
+
+            <TextView
+                android:id="@+id/charcount"
+                android:ems="2"
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:text="@string/sms_maxlen" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
         android:id="@+id/message"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="top"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="onSend"
-        android:text="Send" />
+        android:layout_gravity="top"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettings"
-        android:text="Settings" />
-    
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSend"
+            android:text="@string/send_button_text" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" >
+
+            <Button
+                android:id="@+id/settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:onClick="onSettings"
+                android:text="@string/settings_button_text" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

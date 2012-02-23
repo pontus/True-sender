@@ -14,6 +14,16 @@
     <string name="source">Message source (not supported by all operators):</string>
     <string name="welcome">Welcome to True Sender!</string>
     <string name="long_welcome">Welcome to True sender, a simple application to send text messages through IP based operator. Please note that the author is in no way affilliated with any of the operators. Next, you\'ll be taken to the setup screen.</string>
-    <string name="send_failed">Unfortunately, there was an error while sending the message and it was not delivered.</string>
+    <string name="send_failed">Unfortunately, there was an error while sending the message and it was not delivered.\n\nOperator specific message:\n\n</string>
+    <string name="send_button_text">Send!</string>
+    <string name="settings_button_text">Settings</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="characters_left">Characters left:</string>
+    <string name="sms_maxlen">160</string>
+    <string name="number_start">Destination number should start with international prefix 00 or +.</string>
+    <string name="message_sent_colon">Message sent:</string>
+    <string name="message_sent_exclamation">Message sent!</string>
+    <string name="empty_message">Message is empty, please type something before sending.</string>
 
 </resources>

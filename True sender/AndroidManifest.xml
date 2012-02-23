@@ -5,8 +5,9 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="7" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -19,15 +20,43 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <action android:name="android.intent.action.VIEW" />
 
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TruesenderSettingsActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <category android:name="android.intent.category.PREFERENCES" />
+            </intent-filter>
         </activity>
+
+        <!-- 
+        <receiver
+            android:name="TrueSenderReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
+            </intent-filter>
+        </receiver>
         
-        
-        
+        -->
     </application>
 
 </manifest>
