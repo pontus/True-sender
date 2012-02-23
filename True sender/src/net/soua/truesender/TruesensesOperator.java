@@ -59,10 +59,30 @@ public class TruesensesOperator implements OperatorInterface {
 
 			Log.i(TAG, "Response from True senses: " + responseText);
 
-			if (!responseText.startsWith("01")) {
+			String respCode = responseText.substring(0, 2);
 
-				throw new Exception("Error from True Senses" + responseText);
-			}
+			if (respCode.equals("01"))
+				return true;
+			else if (respCode.equals("90"))
+				throw new Exception("Unknown account " + username);
+			else if (respCode.equals("91"))
+				throw new Exception("Incorrect password " + password);
+			else if (respCode.equals("93"))
+				throw new Exception(
+						"You need to refill your account (add credits)");
+			else if (respCode.equals("94"))
+				throw new Exception(
+						"Untrusted host error, you need to allow this device to send (easiest through "
+								+ " Configuration->Configure HTTP-authentication and select 'Grant all hostnames or IP-Addressess.'");
+			else if (respCode.equals("95"))
+				throw new Exception("Destination number " + destination
+						+ " is invalid");
+			else if (respCode.equals("97"))
+				throw new Exception("Recipient " + destination
+						+ " is blacklisted");
+			else
+				throw new Exception("Unexpected error from True Senses, please report this to truesender@soua.net. Please include the following text: "
+						+ responseText);
 
 		} catch (ClientProtocolException e) {
 
@@ -70,13 +90,14 @@ public class TruesensesOperator implements OperatorInterface {
 			throw new Exception(
 					"ClientProtocolException when talking to True senses");
 
-		} catch (IOException e) {	
+		} catch (IOException e) {
 			Log.e(TAG, "IOException when talking to True senses");
-			throw new Exception("There was a problem when communicating with True Senses, please ensure you have internet connectivity.");
+			throw new Exception(
+					"There was a problem when communicating with True Senses, please ensure you have internet connectivity.");
 		}
 
 		// TODO Auto-generated method stub
-		return true;
+
 	}
 
 }

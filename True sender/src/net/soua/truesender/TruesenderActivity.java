@@ -134,14 +134,31 @@ public class TruesenderActivity extends Activity {
 				
 				if (exceptionMsg == null)
 				{
-					Log.e(TAG, "Operator threw an exception without information.");					
+					Log.e(TAG, "Operator threw an exception without information.");
+					StackTraceElement st[] = e.getStackTrace();
+					String s = "";
+							
+					for (int i=0; i<st.length; i++)
+						s = s+st[i].toString()+"\n";
+					
+					Log.e(TAG, s);
+					
 				}
 				else
 				{
 					Log.e(TAG, "Operator threw an exception: "+exceptionMsg);
 					send_error = exceptionMsg;
+					StackTraceElement st[] = e.getStackTrace();
+					String s = "";
+					
+					for (int i=0; i<st.length; i++)
+						s = s+st[i].toString()+"\n";
+					
+					Log.e(TAG, s);
+					
 				}
 		
+					return 1;  // Sending failed
 			}
 
 			return 0;
@@ -188,10 +205,18 @@ public class TruesenderActivity extends Activity {
 		}
 
 		EditText message = (EditText) findViewById(R.id.message);
-
+		String messageText = message.getText().toString();
+		
+		if (messageText.length() == 0)
+		{
+			new MyAlert(TruesenderActivity.this,
+					getString(R.string.empty_message), null);
+			return;
+		}
+		
 		dialog = ProgressDialog.show(this, "", "Sending. Please wait...", true);
 
-		new SendTask().execute(message.getText().toString(), destinationNumber);
+		new SendTask().execute(messageText, destinationNumber);
 
 	}
 
